@@ -1,0 +1,23 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "API en typescript, usando SQLite que permite agregar frutas y distintos tipos de variedades, cosechas, agricultores y distintos campos y clientes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricContrerasP/Back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricContrerasP/Back-end/issues"
+  },
+  "homepage": "https://github.com/EricContrerasP/Back-end#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
