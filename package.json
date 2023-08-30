@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "database": "tsc src/database/database.ts && node src/database/database.js",
-    "dev": "ts-node-dev index.ts",
+    "dev": "ts-node-dev src/index.ts",
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

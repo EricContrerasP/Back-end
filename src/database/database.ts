@@ -1,8 +1,10 @@
 import * as sqlite3 from "sqlite3"
 
-const db = new sqlite3.Database('api.db')
+const db = new sqlite3.Database('./api.db');
 
 db.serialize(() =>{
+
+
     db.run(`CREATE TABLE IF NOT EXISTS fruit (
         id INTEGER PRIMARY KEY,
         name TEXT UNIQUE
@@ -11,10 +13,10 @@ db.serialize(() =>{
     db.run(`CREATE TABLE IF NOT EXISTS variety (
         id INTEGER PRIMARY KEY,
         fruit_id INTEGER NOT NULL, 
-        variety TEXT NOT NULL,
+        name TEXT NOT NULL,
         FOREIGN KEY (fruit_id)
             REFERENCES fruit (id),
-        UNIQUE(fruit_id, variety)
+        UNIQUE(fruit_id, name)
       )`)
     db.run(`CREATE TABLE IF NOT EXISTS farmer (
         id INTEGER PRIMARY KEY,
@@ -36,10 +38,10 @@ db.serialize(() =>{
       )`)
     db.run(`CREATE TABLE IF NOT EXISTS harvest (
         id INTEGER PRIMARY KEY,
-        farmer_id INTEGER,
-        client_id INTEGER,
-        fields_id INTEGER,
-        variety_id INTEGER,
+        farmer_id INTEGER NOT NULL,
+        client_id INTEGER NOT NULL,
+        fields_id INTEGER NOT NULL,
+        variety_id INTEGER NOT NULL,
         FOREIGN KEY (farmer_id)
             REFERENCES farmer (id),
         FOREIGN KEY (client_id)
@@ -49,7 +51,6 @@ db.serialize(() =>{
         FOREIGN KEY (variety_id)
             REFERENCES variety (id)
       )`)
-
 })
 
 db.all("SELECT name FROM sqlite_master WHERE type='table';", (err, tables: { name: string }[]) => {
