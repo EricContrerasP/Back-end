@@ -30,6 +30,7 @@ export const loadCsv = (req: Request, res: Response) => {
         })
         .on('end', async () => {
             for (const row of data) {
+                try{
                 const fruit_id = await findFruitId(db, row);
                 const variety_id = await findVarietyId(db,fruit_id,row);
                 const farmer_id = await findFarmerId(db, row);
@@ -37,6 +38,11 @@ export const loadCsv = (req: Request, res: Response) => {
                 const fields_id = await findFieldsId(db, row);
 
                 await insertHarvest(db, [farmer_id, client_id, fields_id, variety_id]);
+                }
+                catch (err) {
+                    console.error('Error en una operación asincrónica:', err);
+                    res.status(500).json({ error: 'Error en una operación asincrónica' });
+                }
             }
             console.log("Se termino correctamente la carga de datos")
             fs.unlinkSync(csvfile.path)

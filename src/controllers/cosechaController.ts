@@ -16,6 +16,26 @@ export const getAllHarvest = (req: Request, res: Response) => {
   });
 };
 
+export const getHarvest = (req: Request, res: Response) => {
+  const query = 'SELECT * FROM harvest WHERE id = ?';
+  const cosechaId = Number(req.params.id);
+  if (isNaN(cosechaId) || cosechaId === null) {
+    res.status(400).json({ error: 'ID de cosecha no válido' });
+    return;
+  }
+  db.get(query, [cosechaId], (err, row) => {
+    if (err) {
+      console.error('Error al obtener cosecha:', err.message);
+      return res.status(500).json({ error: 'Error al obtener la cosecha' });
+    }
+    if (!row) {
+      res.status(404).json({ error: 'cosecha no encontrada' });
+      return;
+    }
+    res.json(row);
+  });
+};
+
 export const addHarvest = (req: Request, res: Response) => {
   const {farmer_id, client_id, fields_id, variety_id} = req.body;
 

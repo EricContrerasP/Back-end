@@ -16,6 +16,26 @@ export const getAllFruit = (req: Request, res: Response) => {
   });
 };
 
+export const getFruit = (req: Request, res: Response) => {
+  const query = 'SELECT * FROM fruit WHERE id = ?';
+  const frutaId = Number(req.params.id);
+  if (isNaN(frutaId) || frutaId === null) {
+    res.status(400).json({ error: 'ID de fruta no válido' });
+    return;
+  }
+  db.get(query, [frutaId], (err, row) => {
+    if (err) {
+      console.error('Error al obtener fruta:', err.message);
+      return res.status(500).json({ error: 'Error al obtener la fruta' });
+    }
+    if (!row) {
+      res.status(404).json({ error: 'Fruta no encontrada' });
+      return;
+    }
+    res.json(row);
+  });
+};
+
 export const addFruit = (req: Request, res: Response) => {
   const { name } = req.body;
 

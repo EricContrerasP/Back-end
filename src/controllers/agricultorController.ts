@@ -16,6 +16,26 @@ export const getAllFarmer = (req: Request, res: Response) => {
   });
 };
 
+export const getFarmer = (req: Request, res: Response) => {
+  const query = 'SELECT * FROM farmer WHERE id = ?';
+  const agricultorId = Number(req.params.id);
+  if (isNaN(agricultorId) || agricultorId === null) {
+    res.status(400).json({ error: 'ID de agricultor no válido' });
+    return;
+  }
+  db.get(query, [agricultorId], (err, row) => {
+    if (err) {
+      console.error('Error al obtener agricultor:', err.message);
+      return res.status(500).json({ error: 'Error al obtener la agricultor' });
+    }
+    if (!row) {
+      res.status(404).json({ error: 'agricultor no encontrado' });
+      return;
+    }
+    res.json(row);
+  });
+};
+
 export const addFarmer = (req: Request, res: Response) => {
   const { mail , name , lastname } = req.body;
 

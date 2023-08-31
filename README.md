@@ -37,6 +37,8 @@ A modo de ejemplo se usa el caso de la tabla fruta. las consultas posibles son:
 
 Para obtener la lista de todas las frutas se debe consultar el url [localhost:3000/api/fruta](localhost:3000/api/fruta) con el método GET.
 
+Para obtener una unica fruta se consulta la url con el numero del id [localhost:3000/api/fruta/id](localhost:3000/api/fruta/id) 
+
 Para agregar una fruta nueva realizar un POST a la url [localhost:3000/api/fruta](localhost:3000/api/fruta), enviando un json que contenga el nombre de la fruta.
 
 ```js

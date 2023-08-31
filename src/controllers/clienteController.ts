@@ -16,6 +16,26 @@ export const getAllClient = (req: Request, res: Response) => {
   });
 };
 
+export const getClient = (req: Request, res: Response) => {
+  const query = 'SELECT * FROM client WHERE id = ?';
+  const clienteId = Number(req.params.id);
+  if (isNaN(clienteId) || clienteId === null) {
+    res.status(400).json({ error: 'ID de cliente no válido' });
+    return;
+  }
+  db.get(query, [clienteId], (err, row) => {
+    if (err) {
+      console.error('Error al obtener cliente:', err.message);
+      return res.status(500).json({ error: 'Error al obtener la cliente' });
+    }
+    if (!row) {
+      res.status(404).json({ error: 'cliente no encontrado' });
+      return;
+    }
+    res.json(row);
+  });
+};
+
 export const addClient = (req: Request, res: Response) => {
   const { mail , name , lastname } = req.body;
 

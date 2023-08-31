@@ -17,6 +17,26 @@ export const getAllVariety = (req: Request, res: Response) => {
   });
 };
 
+export const getVariety = (req: Request, res: Response) => {
+  const query = 'SELECT * FROM variety WHERE id = ?';
+  const variedadId = Number(req.params.id);
+  if (isNaN(variedadId) || variedadId === null) {
+    res.status(400).json({ error: 'ID de variedad no válido' });
+    return;
+  }
+  db.get(query, [variedadId], (err, row) => {
+    if (err) {
+      console.error('Error al obtener variedad:', err.message);
+      return res.status(500).json({ error: 'Error al obtener la variedad' });
+    }
+    if (!row) {
+      res.status(404).json({ error: 'variedad no encontrada' });
+      return;
+    }
+    res.json(row);
+  });
+};
+
 export const addVariety = (req: Request, res: Response) => {
   const { fruit_id , name} = req.body;
 
