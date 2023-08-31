@@ -1,7 +1,6 @@
 import sqlite3 from 'sqlite3';
 import { Request, Response } from 'express';
 
-// Crear una nueva instancia de la base de datos
 const db = new sqlite3.Database('./api.db');
 db.run('PRAGMA foreign_keys = ON')
 export const getAllHarvest = (req: Request, res: Response) => {
@@ -42,11 +41,4 @@ export const addHarvest = (req: Request, res: Response) => {
     }
     res.status(201).json({ message: 'Cosecha agregada con éxito' });
   });
-  // db.run(query, [farmer_id, client_id, fields_id, variety_id], (err) => {
-  //   if (err) {
-  //     console.error('Error al agregar cosecha:', err.message);
-  //     return res.status(500).json({ error: 'Error al agregar cosecha' });
-  //   }
-  //   res.status(201).json({ message: 'Cosecha agregada con éxito' });
-  // });
 };

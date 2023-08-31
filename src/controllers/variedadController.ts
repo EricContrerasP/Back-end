@@ -1,7 +1,6 @@
 import sqlite3 from 'sqlite3';
 import { Request, Response } from 'express';
 
-// Crear una nueva instancia de la base de datos
 const db = new sqlite3.Database('./api.db');
 db.run('PRAGMA foreign_keys = ON')
 

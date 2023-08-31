@@ -3,6 +3,12 @@ API en typescript, usando SQLite que permite agregar frutas y distintos tipos de
 
 ## Como iniciar el proyecto
 
+Para instalar las dependencias usar el comando:
+
+```shell
+npm install
+```
+
 Para inicializar la base de datos en caso que no se encuentre el archivo api.db usar el comando:
 
 ```shell
@@ -36,3 +42,5 @@ Para agregar una fruta nueva realizar un POST a la url [localhost:3000/api/fruta
 ```js
 {"name":"Avocado"}
 ```
+
+para cargar el archivo csv se debe enviar a través de POST a "/api/csv" con la llave csvFile.

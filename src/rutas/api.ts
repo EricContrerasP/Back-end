@@ -5,7 +5,10 @@ import { getAllField, addField } from "../controllers/campoController"
 import { getAllFarmer, addFarmer } from "../controllers/agricultorController"
 import { getAllClient, addClient } from "../controllers/clienteController"
 import { getAllHarvest, addHarvest } from "../controllers/cosechaController"
-//import { addCsv } from "../controllers/csvController"
+import { loadCsv } from "../controllers/csvController"
+import multer from 'multer';
+
+const upload = multer({ dest: 'tmp/csv/' });
 
 const router = express.Router()
 
@@ -27,8 +30,6 @@ router.post("/cliente", addClient)
 router.get("/cosecha", getAllHarvest)
 router.post("/cosecha", addHarvest)
 
-router.post("/csv", (_req, res) =>{
-    res.send('guardar un csv completo')
-})
+router.post("/csv",upload.single("csvFile"), loadCsv)
 
 export default router

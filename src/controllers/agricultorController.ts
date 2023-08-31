@@ -1,7 +1,6 @@
 import sqlite3 from 'sqlite3';
 import { Request, Response } from 'express';
 
-// Crear una nueva instancia de la base de datos
 const db = new sqlite3.Database('./api.db');
 
 export const getAllFarmer = (req: Request, res: Response) => {
@@ -30,7 +29,7 @@ export const addFarmer = (req: Request, res: Response) => {
     return res.status(400).json({ error: 'El apellido del agricultor es requerido' });
   }
 
-  const query = 'INSERT INTO farmer (address, name, lastname) VALUES (?, ?, ?)';
+  const query = 'INSERT INTO farmer (mail, name, lastname) VALUES (?, ?, ?)';
 
   db.run(query, [mail, name, lastname], (err) => {
     if (err) {
